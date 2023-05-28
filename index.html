@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Farfalle</title>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <meta content="utf-8" http-equiv="encoding">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+
+<body>
+  <h1>&#9672; InfoVis 2023 - progetto Butterfly V3 &#9672;
+    <p> Studente: Marco Caponi </p> </h1>
+  <script>
+    let selectedVar = 3
+    d3.json("data/dataset.json").then(function (data) {
+
+      // Definisci le dimensioni del contenitore svg
+      var width = 2000;
+      var height = 2000;
+
+      // Crea un contenitore svg e imposta le dimensioni
+      var svg = d3.select("body").append("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+      // Definisci le scale per la posizione delle farfalle
+
+      var xScale = d3.scaleLinear().domain([0, d3.max(data, d => d.var1)]).range([0, 1000]);
+      var yScale = d3.scaleLinear().domain([0, d3.max(data, d => d.var2)]).range([0, 600]);
+      var sizeScale = d3.scaleLinear().domain([0, d3.max(data, d => selectedVar === 3 ? d.var3 : selectedVar === 4 ? d.var4 : d.var5)]).range([10, 20]);
+
+      // Aggiungi le farfalle al grafico
+      var butterfly = svg.selectAll(".butterfly")
+        .data(data)
+        .enter().append("g")
+        .attr("class", "butterfly")
+        //  .attr("transform", function (d) { return "translate(" + xScale(d[0]) + "," + yScale(d[1]) + ")"; });
+        .attr("transform", d => `translate(${xScale(d.var1)}, ${yScale(d.var2)}) scale(${sizeScale(selectedVar === 3 ? d.var3 : selectedVar === 4 ? d.var4 : d.var5) / 20})`);
+
+      //Aggiungi una Linea per il corpo della farfalla
+      butterfly.append("line")
+        .attr("class", "body")
+        .attr("x1", 50)
+        .attr("y1", 10)
+        .attr("x2", 50)
+        .attr("y2", 90)
+        .style("stroke", "brown")
+        .style("stroke-width", 4);
+
+
+      // Aggiungiamo il triangolo sinistro ruotato
+      butterfly.append("polygon")
+        .attr("points", "50,10 20,40 50,70")
+        .attr("transform", "rotate(-180, 35, 40)")
+        .style("fill", "green")
+        .style("stroke", "orange")
+        .style("stroke-width", 2);
+
+      // Aggiungiamo il triangolo destro ruotato
+      butterfly.append("polygon")
+        .attr("points", "50,10 80,40 50,70")
+        .attr("transform", "rotate(180, 65, 40)")
+        .style("fill", "green")
+        .style("stroke", "orange")
+        .style("stroke-width", 2);
+
+
+      //seleziona la prima formica per default
+      var currentbutterfly = null;
+      var butterflies = d3.selectAll(".butterfly");
+
+      butterfly.on("click", function () {
+        selectedVar = selectedVar === 3 ? 4 : selectedVar === 4 ? 5 : 3;
+        console.log("click")
+        butterflies.transition().duration(1000)
+          .attr("transform", d => `translate(${xScale(d.var1)}, ${yScale(d.var2)}) scale(${sizeScale(selectedVar === 3 ? d.var3 : selectedVar === 4 ? d.var4 : d.var5) / 20})`);
+      });
+    });
+  </script>
+</body>
