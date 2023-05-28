@@ -10,3 +10,8 @@ la terza variabile sia usata per la grandezza delle ali
 la quarta e la quinta variabile per il momento non vengono utilizzate.
 
 Quando con il mouse si clicca su una farfalla, le farfalle rimangono tutte nella stessa posizione x e y, ma la variabile 4 viene utilizzata (per tutte le farfalle) in luogo della variabile 3 per la grandezza delle ali. Cliccando ancora viene utilizzata la variabile 5, e poi di nuovo la variabile 3, in modo ciclico. Fai in modo che le transizioni avvengano con un'animazione fluida. Usa le scale d3.js per mappare il dominio dei valori delle variabili (che deve essere arbitrario) sul range dei valori delle coordinate o delle grandezze delle farfalle, che invece dipende dalla tua visualizzazione.
+
+## Avvio dell'applicativo
+Lanciare il comando seguente all'interno della directory principale:
+
+    `python3 -m http.server`
