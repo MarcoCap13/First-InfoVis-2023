@@ -1,5 +1,9 @@
 # First-InfoVis-2023
 
+| Nome | Matricola | E-mail | Profilo GitHub |
+|:---|:---|:---|:---|
+|Marco Caponi|508773|MAR.CAPONI4@stud.uniroma3.it|https://github.com/MarcoCap13|.
+
 ## Specifiche
 
 Crea un file json con dei dati multivariati: ci sono 10 data-point e ogni data-point ha cinque variabili quantitative i cui valori sono tutti positivi. In base a questi dati disegna 10 piccole farfalle (è sufficiente la silhouette) posizionate sullo schermo in modo che:
