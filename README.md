@@ -1,6 +1,3 @@
-# InfoVis_1
-First project for the Information Visualization course, Roma Tre 2019/2020
-
 ## Specifiche
 Crea un file json con dei dati multivariati: ci sono 10 data-point e ogni data-point ha cinque variabili quantitative i cui valori sono tutti positivi. In base a questi dati disegna 10 pesciolini nell'area di disegno (ogni pesciolino corrisponde ad un data-point). 
 
