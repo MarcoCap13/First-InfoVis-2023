@@ -6,7 +6,7 @@
 ## Avvio dell'applicativo
 Lanciare il comando seguente all'interno della directory principale:
 
-    `python -m http.server`
+    python -m http.server
 
 > **Note**
 > Avviare l'applicativo in una pagina in incognito poichè il browser potrebbe non visualizzarlo correttamente
