@@ -8,8 +8,8 @@ d3.json("data/dataset.json").then(function (data) {
   var height = 1000;
 
   //definisco la grandezza delle farfalle che ho creato
-  var butterflyWidth = 50;
-  var butterflyHeight = 50;
+  var butterflyWidth = 100;
+  var butterflyHeight = 100;
   
   // Crea un contenitore svg e imposta le dimensioni
   var svg = d3.select("body").append("svg")
