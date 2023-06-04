@@ -7,22 +7,28 @@ d3.json("data/dataset.json").then(function (data) {
   var width = 1800;
   var height = 1000;
 
+  //definisco la grandezza delle farfalle che ho creato
+  var butterflyWidth = 50;
+  var butterflyHeight = 50;
+  
   // Crea un contenitore svg e imposta le dimensioni
   var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
 
   // Definisci le scale d3.js per la posizione e grandezze delle farfalle
-  var xScale = d3.scaleLinear().domain([0, d3.max(data, d => d.var1)]).range([0, 1000]);
-  var yScale = d3.scaleLinear().domain([0, d3.max(data, d => d.var2)]).range([0, 600]);
-  var sizeScale = d3.scaleLinear().domain([0, d3.max(data, d => selectedVar === 3 ? d.var3 : selectedVar === 4 ? d.var4 : d.var5)]).range([10, 20]);
+  var xScale = d3.scaleLinear().domain([0, d3.max(data, d => d.x)]).range([0, 1000]);
+  var yScale = d3.scaleLinear().domain([0, d3.max(data, d => d.y)]).range([0, 600]);
+  var sizeScale = d3.scaleLinear().domain([0, d3.max(data, d => selectedVar === 3 ? d.wing : selectedVar === 4 ? d.var4 : d.var5)]).range([10, 20]);
 
   // Aggiungi le farfalle al grafico
   var butterfly = svg.selectAll(".butterfly")
     .data(data)
     .enter().append("g")
     .attr("class", "butterfly")
-    .attr("transform", d => `translate(${xScale(d.var1)}, ${yScale(d.var2)})`);
+    .attr("width", butterflyWidth)
+    .attr("height", butterflyHeight)
+    .attr("transform", d => `translate(${xScale(d.x)}, ${yScale(d.y)})`);
 
   // Aggiungi un contenitore per il corpo della farfalla
   var bodyContainer = butterfly.append("g")
@@ -39,6 +45,7 @@ d3.json("data/dataset.json").then(function (data) {
    *                                  |/|\|
    */
 
+  
   // Aggiungi una Linea per il corpo della farfalla nel contenitore delle ali
   wingContainer.append("line")
     .attr("class", "body")
@@ -80,6 +87,6 @@ d3.json("data/dataset.json").then(function (data) {
     butterflies.transition().duration(1000)
     //qui applico la trasformazione, xScale e yScale rimangono inalterate con le due variabili che identificano l'asse x e y corrispettivamente
     // per la sizeScale delle Ali, si effetua la traslazione in base al valore assunto da selectedVar ( 3, 4 o 5)
-    .attr("transform", d => `translate(${xScale(d.var1)}, ${yScale(d.var2)}) scale(${sizeScale(selectedVar === 3 ? d.var3 : selectedVar === 4 ? d.var4 : d.var5) / 20})`);
+    .attr("transform", d => `translate(${xScale(d.x)}, ${yScale(d.y)}) scale(${sizeScale(selectedVar === 3 ? d.wing : selectedVar === 4 ? d.var4 : d.var5) / 20})`);
   });
 });
